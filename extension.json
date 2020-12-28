@@ -1,0 +1,6 @@
+{
+  "id": "Bitbucket Pipelines",
+  "name": "Bitbucket Pipelines",
+  "srcdoc": "./build/index.html",
+  "sidebar": true
+}
