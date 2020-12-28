@@ -15,7 +15,7 @@ const Pipelines = () => {
 
 init(extension => {
     ReactDOM.render(
-        <App extension={extension} />,
+        <Pipelines extension={extension} />,
         document.getElementById("root")
     )
 })
