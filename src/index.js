@@ -13,6 +13,8 @@ class App extends React.Component {
 
         // Trigger update method to setup initial state
         this.state = this.constructState()
+
+        console.log('start')
     }
 
     componentDidMount = () => {
