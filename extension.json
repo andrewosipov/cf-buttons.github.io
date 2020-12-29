@@ -1,5 +1,5 @@
 {
-  "id": "Bitbucket Pipelines",
+  "id": "bitbucket-pipelines",
   "name": "Bitbucket Pipelines",
   "srcdoc": "./build/index.html",
   "sidebar": true
