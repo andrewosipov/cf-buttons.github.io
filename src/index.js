@@ -246,18 +246,22 @@ class App extends React.Component {
 const Pipelines = () => {
     return (
         <>
-            <Button
-                className="publish-button"
-                buttonType="positive"
-            >
-                Build preview
-            </Button>
-            <Button
-                className="publish-button"
-                buttonType="negative"
-            >
-                Build master
-            </Button>
+            <p>
+                <Button
+                    className="publish-button"
+                    buttonType="positive"
+                >
+                    Build preview
+                </Button>
+            </p>
+            <p>
+                <Button
+                    className="publish-button"
+                    buttonType="negative"
+                >
+                    Build master
+                </Button>
+            </p>
         </>
     );
 }
