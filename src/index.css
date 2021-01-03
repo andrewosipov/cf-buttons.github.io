@@ -6,6 +6,7 @@ div {
     border: 0;
     font-size: 100%;
     font: inherit;
+    height: 20px;
     vertical-align: baseline;
 }
 
