@@ -8,3 +8,7 @@ div {
     font: inherit;
     vertical-align: baseline;
 }
+
+button {
+    margin: 0 20px 0 0;
+}
