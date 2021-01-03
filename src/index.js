@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, TextLink, Paragraph } from '@contentful/forma-36-react-components';
+import { Button, TextLink, Paragraph, HelpText } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 // import relativeDate from "relative-date";
 import '@contentful/forma-36-react-components/dist/styles.css';
@@ -247,6 +247,7 @@ const Pipelines = () => {
     return (
         <>
             <Paragraph>
+                <HelpText>Run building a preview site</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="positive"
@@ -255,6 +256,7 @@ const Pipelines = () => {
                 </Button>
             </Paragraph>
             <Paragraph>
+                <HelpText>Run building a live site</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
