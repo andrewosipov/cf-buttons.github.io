@@ -246,22 +246,22 @@ class App extends React.Component {
 const Pipelines = () => {
     return (
         <>
-            <p>
+            <Paragraph>
                 <Button
                     className="publish-button"
                     buttonType="positive"
                 >
                     Build preview
                 </Button>
-            </p>
-            <p>
+            </Paragraph>
+            <Paragraph>
                 <Button
                     className="publish-button"
                     buttonType="negative"
                 >
                     Build master
                 </Button>
-            </p>
+            </Paragraph>
         </>
     );
 }
