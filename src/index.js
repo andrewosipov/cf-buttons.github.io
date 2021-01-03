@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button, TextLink, Paragraph } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
-import relativeDate from "relative-date";
+// import relativeDate from "relative-date";
 import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
 import './index.css';
@@ -243,9 +243,28 @@ class App extends React.Component {
     }
 }
 
+const Pipelines = () => {
+    return (
+        <>
+            <Button
+                className="publish-button"
+                buttonType="positive"
+            >
+                Build preview
+            </Button>
+            <Button
+                className="publish-button"
+                buttonType="negative"
+            >
+                Build master
+            </Button>
+        </>
+    );
+}
+
 init(extension => {
     ReactDOM.render(
-        <App extension={extension} />,
+        <Pipelines extension={extension} />,
         document.getElementById("root")
     )
 });
