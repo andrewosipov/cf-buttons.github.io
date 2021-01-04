@@ -257,10 +257,7 @@ const Pipelines = () => {
             {
             headers: {
                 Accept: 'application/json',
-                Authorization: JSON.stringify({
-                    username: 'mail@andrew-osipov.pro',
-                    password: 'p#0rUm@11'
-                })
+                Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
             }
         })
             .then((resp) => console.log('res', resp))
