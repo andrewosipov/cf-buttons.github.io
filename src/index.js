@@ -245,24 +245,6 @@ class App extends React.Component {
 }
 
 const Pipelines = () => {
-    useEffect(() => {
-        axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
-            {
-                "target": {
-                    "ref_type": "branch",
-                    "type": "pipeline_ref_target",
-                    "ref_name": "staging"
-                }
-            },
-            {
-            headers: {
-                Accept: 'application/json',
-                Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
-            }
-        })
-            .then((resp) => console.log('res', resp))
-            .catch((err) => console.log('err', err))
-    }, []);
 
     return (
         <>
