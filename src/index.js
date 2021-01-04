@@ -257,10 +257,10 @@ const Pipelines = () => {
             {
             headers: {
                 Accept: 'application/json',
-                Authorization: {
+                Authorization: JSON.stringify({
                     username: 'mail@andrew-osipov.pro',
                     password: 'limass0l'
-                }
+                })
             }
         })
             .then((resp) => console.log('res', resp))
