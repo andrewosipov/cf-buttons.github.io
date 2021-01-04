@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, TextLink, Paragraph, HelpText } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
+import axios from 'axios';
 // import relativeDate from "relative-date";
 import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
@@ -244,6 +245,12 @@ class App extends React.Component {
 }
 
 const Pipelines = () => {
+    useEffect(() => {
+        axios.get('https://google.com')
+            .then((resp) => console.log('res', resp))
+            .catch((err) => console.log('err', err))
+    }, []);
+
     return (
         <>
             <Paragraph>
