@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, TextLink, Paragraph, HelpText } from '@contentful/forma-36-react-components';
+import { Button, TextLink, Paragraph, HelpText, Dropdown, DropdownList, DropdownListItem } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import axios from 'axios';
 // import relativeDate from "relative-date";
@@ -245,9 +245,34 @@ class App extends React.Component {
 }
 
 const Pipelines = () => {
+    const [isOpen, setOpen] = useState(false);
 
     return (
         <>
+            <Dropdown
+                isOpen={isOpen}
+                onClose={() => setOpen(false)}
+                toggleElement={
+                    <Button
+                        size="small"
+                        buttonType="muted"
+                        indicateDropdown
+                        onClick={() => setOpen(!isOpen)}
+                    >
+                        Trigger Dropdown
+                    </Button>
+                }
+            >
+                <DropdownList>
+                    <DropdownListItem onClick={() => {}}>
+                        Dropdown list item 1
+                    </DropdownListItem>
+                    <DropdownListItem onClick={() => {}}>
+                        Dropdown list item 2
+                    </DropdownListItem>
+                </DropdownList>
+            </Dropdown>
+
             <Paragraph>
                 <HelpText>Run building a preview site</HelpText>
                 <Button
