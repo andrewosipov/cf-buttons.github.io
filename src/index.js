@@ -259,21 +259,21 @@ const Pipelines = () => {
                         indicateDropdown
                         onClick={() => setOpen(!isOpen)}
                     >
-                        Trigger Dropdown
+                        Build Site
                     </Button>
                 }
             >
                 <DropdownList>
                     <DropdownListItem onClick={() => {}}>
-                        Dropdown list item 1
+                        Push all changed entries to Preview site
                     </DropdownListItem>
                     <DropdownListItem onClick={() => {}}>
-                        Dropdown list item 2
+                        Push all changed entries to Live site. Caution: check preview site first!
                     </DropdownListItem>
                 </DropdownList>
             </Dropdown>
 
-            <Paragraph>
+            {/*<Paragraph>
                 <HelpText>Run building a preview site</HelpText>
                 <Button
                     className="publish-button"
@@ -290,7 +290,7 @@ const Pipelines = () => {
                 >
                     Build master
                 </Button>
-            </Paragraph>
+            </Paragraph>*/}
         </>
     );
 }
