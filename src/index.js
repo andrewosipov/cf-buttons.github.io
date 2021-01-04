@@ -248,9 +248,10 @@ const Pipelines = () => {
     useEffect(() => {
         axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/', {
             headers: {
+                Accept: 'application/json',
                 Authorization: {
                     username: 'mail@andrew-osipov.pro',
-                    password: 'p#0rUm@11'
+                    password: 'limass0l'
                 }
             }
         })
