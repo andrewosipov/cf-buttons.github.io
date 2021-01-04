@@ -268,7 +268,7 @@ const Pipelines = () => {
                         Push all changed entries to Preview site
                     </DropdownListItem>
                     <DropdownListItem onClick={() => {}}>
-                        Push all changed entries to Live site. Caution: check preview site first!
+                        Push all changed entries to Live site
                     </DropdownListItem>
                 </DropdownList>
             </Dropdown>
