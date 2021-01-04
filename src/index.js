@@ -259,7 +259,7 @@ const Pipelines = () => {
                 Accept: 'application/json',
                 Authorization: JSON.stringify({
                     username: 'mail@andrew-osipov.pro',
-                    password: 'limass0l'
+                    password: 'p#0rUm@11'
                 })
             }
         })
