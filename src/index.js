@@ -250,7 +250,7 @@ const Pipelines = () => {
     return (
         <>
             <Paragraph>
-                <HelpText>Push all changed entries to Preview site</HelpText>
+                <HelpText style={{ marginBottom: 10 }}>Push all changed entries to Preview site</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="positive"
@@ -259,10 +259,11 @@ const Pipelines = () => {
                 </Button>
             </Paragraph>
             <Paragraph>
-                <HelpText>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
+                <HelpText style={{ marginBottom: 10 }}>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
+                    onClick={() => setModalShown(true)}
                 >
                     Build the live site
                 </Button>
