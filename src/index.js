@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Paragraph, HelpText, Spinner } from '@contentful/forma-36-react-components';
+import { Button, IconButton, Paragraph, HelpText, Spinner } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import axios from 'axios';
 import '@contentful/forma-36-react-components/dist/styles.css';
@@ -297,14 +297,15 @@ const Pipelines = () => {
             </Paragraph>
             <Paragraph>
                 <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. <br />Caution: check preview site first!</HelpText>
-                <Button
+                <IconButton
+                    iconProps={{ icon: 'Warning', size: 'medium' }}
                     className="publish-button"
                     buttonType="negative"
                     isFullWidth
                     onClick={onLiveClick}
                 >
                     { isLiveSpin ? <Spinner color="white" /> : <>Build the live site</> }
-                </Button>
+                </IconButton>
             </Paragraph>
             <Paragraph>&nbsp;</Paragraph>
         </>
