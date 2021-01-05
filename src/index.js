@@ -259,7 +259,7 @@ const Pipelines = () => {
                 </Button>
             </Paragraph>
             <Paragraph>
-                <HelpText style={{ marginBottom: 10 }}>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
+                <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
