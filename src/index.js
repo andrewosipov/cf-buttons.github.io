@@ -256,7 +256,7 @@ const Pipelines = () => {
     const [liveStatusTimer, setLiveStatusTimer] = useState(0);
 
     const checkPipelineStatus = (uuid, callback) => axios
-        .get(`${url}/${encodeURI(uuid)}`, config)
+        .get(`${url}${encodeURI(uuid)}`, config)
         .then((response) => {
             if (response.data.state.name === 'COMPLETED') {
                 callback()
