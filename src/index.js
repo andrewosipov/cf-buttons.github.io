@@ -262,8 +262,8 @@ const Pipelines = () => {
                     Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
                 }
             })
-            .then((resp) => setPreviewSpin(false))
-            .catch((err) => setPreviewSpin(false))
+            //.then((resp) => setPreviewSpin(false))
+            //.catch((err) => setPreviewSpin(false))
 
     }, []);
 
