@@ -237,25 +237,31 @@ class App extends React.Component {
     }
 }
 
+const url = 'https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/';
+const payload = {
+    target: {
+        ref_type: "branch",
+        type: "pipeline_ref_target"
+    }
+};
+const config = {
+    headers: {
+        Accept: 'application/json',
+        Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
+    }
+};
+
 const Pipelines = () => {
     const [isPreviewSpin, setPreviewSpin] = useState(false);
     const [isLiveSpin, setLiveSpin] = useState(false);
+
     const onPreviewClick = useCallback(() => {
         setPreviewSpin(true);
-        axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
-            {
-                "target": {
-                    "ref_type": "branch",
-                    "type": "pipeline_ref_target",
-                    "ref_name": "staging"
-                }
-            },
-            {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
-                }
-            })
+        axios
+            .post(url,
+            { ...payload, ref_name: "staging" },
+                config
+            )
             .then((resp) => setPreviewSpin(false))
             .catch((err) => setPreviewSpin(false))
 
@@ -263,20 +269,11 @@ const Pipelines = () => {
 
     const onLiveClick = useCallback(() => {
         setLiveSpin(true);
-        axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
-            {
-                "target": {
-                    "ref_type": "branch",
-                    "type": "pipeline_ref_target",
-                    "ref_name": "master"
-                }
-            },
-            {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
-                }
-            })
+        axios
+            .post(url,
+                { ...payload, ref_name: "master" },
+                config
+            )
         .then((resp) => setLiveSpin(false))
         .catch((err) => setLiveSpin(false))
 
