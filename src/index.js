@@ -257,7 +257,7 @@ const Pipelines = () => {
         setPreviewSpin(true);
         axios
             .post(url,
-            { ...target, ref_name: "staging" },
+            { target: { ...target, ref_name: "staging" } },
                 config
             )
             .then((resp) => setPreviewSpin(false))
@@ -269,7 +269,7 @@ const Pipelines = () => {
         setLiveSpin(true);
         axios
             .post(url,
-            { ...target, ref_name: "master" },
+            { target: { ...target, ref_name: "master" } },
                 config
             )
         .then((resp) => setLiveSpin(false))
