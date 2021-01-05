@@ -239,6 +239,7 @@ class App extends React.Component {
 
 const Pipelines = () => {
     const [isPreviewSpin, setPreviewSpin] = useState(false);
+    const [isLiveSpin, setLiveSpin] = useState(false);
     const onPreviewClick = useCallback(() => {
         setPreviewSpin(true);
         axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
@@ -255,8 +256,29 @@ const Pipelines = () => {
                     Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
                 }
             })
-            //.then((resp) => setPreviewSpin(false))
-            //.catch((err) => setPreviewSpin(false))
+            .then((resp) => setPreviewSpin(false))
+            .catch((err) => setPreviewSpin(false))
+
+    }, []);
+
+    const onLiveClick = useCallback(() => {
+        setLiveSpin(true);
+        axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
+            {
+                "target": {
+                    "ref_type": "branch",
+                    "type": "pipeline_ref_target",
+                    "ref_name": "master"
+                }
+            },
+            {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
+                }
+            })
+        .then((resp) => setLiveSpin(false))
+        .catch((err) => setLiveSpin(false))
 
     }, []);
 
@@ -267,9 +289,10 @@ const Pipelines = () => {
                 <Button
                     className="publish-button"
                     buttonType="positive"
+                    isFullWidth
                     onClick={onPreviewClick}
                 >
-                    {isPreviewSpin ? <Spinner /> : <>Build the preview site</>}
+                    { isPreviewSpin ? <Spinner color="white" /> : <>Build the preview site</> }
                 </Button>
             </Paragraph>
             <Paragraph>
@@ -277,9 +300,10 @@ const Pipelines = () => {
                 <Button
                     className="publish-button"
                     buttonType="negative"
-                    onClick={() => console.log('click')}
+                    isFullWidth
+                    onClick={onLiveClick}
                 >
-                    Build the live site
+                    { isLiveSpin ? <Spinner color="white" /> : <>Build the live site</> }
                 </Button>
             </Paragraph>
             <Paragraph>&nbsp;</Paragraph>

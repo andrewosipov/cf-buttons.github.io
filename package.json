@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@babel/core": "7.3.4",
-    "@babel/plugin-proposal-class-properties": "7.3.4",
-    "@babel/plugin-transform-runtime": "7.3.4",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "7.3.4",
-    "@babel/preset-react": "7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@contentful/contentful-extension-scripts": "0.7.2",
     "contentful-cli": "0.26.2"
   },
@@ -17,7 +17,6 @@
     "@contentful/forma-36-tokens": "^0.4.1",
     "axios": "^0.21.1",
     "contentful-ui-extensions-sdk": "3.7.2",
-    "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6"
   },
