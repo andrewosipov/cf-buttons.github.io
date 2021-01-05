@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Spin, useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, TextLink, Paragraph, HelpText, Modal } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
@@ -245,7 +245,27 @@ class App extends React.Component {
 }
 
 const Pipelines = () => {
-    const [isModalShown, setModalShown] = useState(false);
+    const [isPreviewSpin, setPreviewSpin] = useState(false);
+    const onPreviewClick = useCallback(() => {
+        setPreviewSpin(true);
+        axios.post('https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/',
+            {
+                "target": {
+                    "ref_type": "branch",
+                    "type": "pipeline_ref_target",
+                    "ref_name": "staging"
+                }
+            },
+            {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
+                }
+            })
+            .then((resp) => setPreviewSpin(false))
+            .catch((err) => setPreviewSpin(false))
+
+    }, []);
 
     return (
         <>
@@ -254,9 +274,9 @@ const Pipelines = () => {
                 <Button
                     className="publish-button"
                     buttonType="positive"
-                    onClick={() => console.log('click 1')}
+                    onClick={onPreviewClick}
                 >
-                    Build the preview site
+                    {isPreviewSpin ? <Spin /> : 'Build the preview site'}
                 </Button>
             </Paragraph>
             <Paragraph>
