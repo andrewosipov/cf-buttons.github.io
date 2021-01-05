@@ -297,14 +297,14 @@ const Pipelines = () => {
             </Paragraph>
             <Paragraph>
                 <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. <br />Caution: check preview site first!</HelpText>
-                <IconButton
+                <Button
                     className="publish-button"
                     buttonType="negative"
                     isFullWidth
                     onClick={onLiveClick}
                 >
                     { isLiveSpin ? <Spinner color="white" /> : <>Build the live site</> }
-                </IconButton>
+                </Button>
             </Paragraph>
             <Paragraph>&nbsp;</Paragraph>
         </>
