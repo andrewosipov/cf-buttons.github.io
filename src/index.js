@@ -256,7 +256,7 @@ const Pipelines = () => {
     const [liveStatusTimer, setLiveStatusTimer] = useState(0);
 
     const checkPipelineStatus = (uuid, callback) => axios
-        .get(`${url}/{}/${uuid}`, config)
+        .get(`${url}/${uuid}`, config)
         .then((response) => {
             if (response.data.state.name === 'COMPLETED') {
                 callback()
@@ -275,6 +275,7 @@ const Pipelines = () => {
             )
             .then((response) => {
                 setPreviewStatusTimer(setInterval(() => {
+                    console.log(response.data.uuid)
                     checkPipelineStatus(response.data.uuid, () => {
                         setPreviewSpin(false);
                     })
