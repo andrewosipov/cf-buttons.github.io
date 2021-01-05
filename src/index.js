@@ -254,36 +254,21 @@ const Pipelines = () => {
                 <Button
                     className="publish-button"
                     buttonType="positive"
+                    onClick={() => console.log('click 1')}
                 >
                     Build the preview site
                 </Button>
             </Paragraph>
             <Paragraph>
-                <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
+                <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. <br />Caution: check preview site first!</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
-                    onClick={() => setModalShown(true)}
+                    onClick={() => console.log('click')}
                 >
                     Build the live site
                 </Button>
             </Paragraph>
-            <Modal title="Centered modal" isShown={isModalShown}>
-                {() => (
-                    <>
-                        <Modal.Header title="Push all changed entries to Live site?" />
-                        <Modal.Content>Caution: All changed entries will be pushed to Live site. Check preview site first!</Modal.Content>
-                        <Modal.Controls>
-                            <Button buttonType="negative" onClick={() => setModalShown(false)}>
-                                Confirm
-                            </Button>
-                            <Button buttonType="muted" onClick={() => setModalShown(false)}>
-                                Cancel
-                            </Button>
-                        </Modal.Controls>
-                    </>
-                )}
-            </Modal>
         </>
     );
 }
