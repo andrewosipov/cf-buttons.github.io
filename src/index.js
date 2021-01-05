@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, TextLink, Paragraph, HelpText, Dropdown, DropdownList, DropdownListItem } from '@contentful/forma-36-react-components';
+import { Button, TextLink, Paragraph, HelpText, Modal } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import axios from 'axios';
 // import relativeDate from "relative-date";
@@ -245,52 +245,44 @@ class App extends React.Component {
 }
 
 const Pipelines = () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isModalShown, setModalShown] = useState(false);
 
     return (
         <>
-            <Dropdown
-                isOpen={isOpen}
-                onClose={() => setOpen(false)}
-                toggleElement={
-                    <Button
-                        size="small"
-                        buttonType="muted"
-                        indicateDropdown
-                        onClick={() => setOpen(!isOpen)}
-                    >
-                        Build Site
-                    </Button>
-                }
-            >
-                <DropdownList>
-                    <DropdownListItem onClick={() => {}}>
-                        Push all changed entries to Preview site
-                    </DropdownListItem>
-                    <DropdownListItem onClick={() => {}}>
-                        Push all changed entries to Live site
-                    </DropdownListItem>
-                </DropdownList>
-            </Dropdown>
-
-            {/*<Paragraph>
-                <HelpText>Run building a preview site</HelpText>
+            <Paragraph>
+                <HelpText>Push all changed entries to Preview site</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="positive"
                 >
-                    Build preview
+                    Build the preview site
                 </Button>
             </Paragraph>
             <Paragraph>
-                <HelpText>Run building a live site</HelpText>
+                <HelpText>Push all changed entries to Live site. Caution: check preview site first!</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
                 >
-                    Build master
+                    Build the live site
                 </Button>
-            </Paragraph>*/}
+            </Paragraph>
+            <Modal title="Centered modal" isShown={isModalShown}>
+                {() => (
+                    <>
+                        <Modal.Header title="Push all changed entries to Live site?" />
+                        <Modal.Content>Caution: All changed entries will be pushed to Live site. Check preview site first!</Modal.Content>
+                        <Modal.Controls>
+                            <Button buttonType="negative" onClick={() => setModalShown(false)}>
+                                Confirm
+                            </Button>
+                            <Button buttonType="muted" onClick={() => setModalShown(false)}>
+                                Cancel
+                            </Button>
+                        </Modal.Controls>
+                    </>
+                )}
+            </Modal>
         </>
     );
 }
