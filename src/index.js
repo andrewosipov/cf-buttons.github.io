@@ -238,11 +238,9 @@ class App extends React.Component {
 }
 
 const url = 'https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/';
-const payload = {
-    target: {
-        ref_type: "branch",
-        type: "pipeline_ref_target"
-    }
+const target = {
+    ref_type: "branch",
+    type: "pipeline_ref_target"
 };
 const config = {
     headers: {
@@ -259,7 +257,7 @@ const Pipelines = () => {
         setPreviewSpin(true);
         axios
             .post(url,
-            { ...payload, ref_name: "staging" },
+            { ...target, ref_name: "staging" },
                 config
             )
             .then((resp) => setPreviewSpin(false))
@@ -271,7 +269,7 @@ const Pipelines = () => {
         setLiveSpin(true);
         axios
             .post(url,
-                { ...payload, ref_name: "master" },
+            { ...target, ref_name: "master" },
                 config
             )
         .then((resp) => setLiveSpin(false))
