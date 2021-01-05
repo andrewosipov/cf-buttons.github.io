@@ -252,6 +252,19 @@ const config = {
 const Pipelines = () => {
     const [isPreviewSpin, setPreviewSpin] = useState(false);
     const [isLiveSpin, setLiveSpin] = useState(false);
+    const [previewStatusTimer, setPreviewStatusTimer] = useState(0);
+    const [liveStatusTimer, setLiveStatusTimer] = useState(0);
+
+    const checkPipelineStatus = (uuid, callback) => axios
+        .get(`${url}/${uuid}`, config)
+        .then((response) => {
+            if (response.data.state.name === 'COMPLETED') {
+                callback()
+            }
+        })
+
+    const stopPreviewTimer = () => setTimeout(() => clearInterval(previewStatusTimer), 300000)
+    const stopLiveTimer = () => setTimeout(() => clearInterval(liveStatusTimer), 300000)
 
     const onPreviewClick = useCallback(() => {
         setPreviewSpin(true);
@@ -260,7 +273,14 @@ const Pipelines = () => {
             { target: { ...target, ref_name: "staging" } },
                 config
             )
-            .then((resp) => setPreviewSpin(false))
+            .then((response) => {
+                setPreviewStatusTimer(setInterval(() => {
+                    checkPipelineStatus(response.data.uuid, () => {
+                        setPreviewSpin(false);
+                        stopPreviewTimer();
+                    })
+                }, 10000))
+            })
             .catch((err) => setPreviewSpin(false))
 
     }, []);
@@ -272,7 +292,14 @@ const Pipelines = () => {
             { target: { ...target, ref_name: "master" } },
                 config
             )
-        .then((resp) => setLiveSpin(false))
+        .then((resp) => {
+            setLiveStatusTimer(setInterval(() => {
+                checkPipelineStatus(response.data.uuid, () => {
+                    setLiveSpin(false);
+                    stopLiveTimer();
+                })
+            }, 10000))
+        })
         .catch((err) => setLiveSpin(false))
 
     }, []);
