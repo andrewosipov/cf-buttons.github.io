@@ -276,7 +276,7 @@ const Pipelines = () => {
                     buttonType="positive"
                     onClick={onPreviewClick}
                 >
-                    {isPreviewSpin ? <Spin /> : 'Build the preview site'}
+                    {isPreviewSpin ? <Spin /> : <>Build the preview site</>}
                 </Button>
             </Paragraph>
             <Paragraph>
