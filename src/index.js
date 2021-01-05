@@ -1,9 +1,8 @@
-import React, { Spin, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, TextLink, Paragraph, HelpText, Modal } from '@contentful/forma-36-react-components';
+import { Button, Paragraph, HelpText, Spinner } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import axios from 'axios';
-// import relativeDate from "relative-date";
 import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
 import './index.css';
@@ -233,12 +232,6 @@ class App extends React.Component {
                 >
                     Build preview
                 </Button>
-                <TextLink
-                    className="f36-margin-top--s f36-margin-bottom--xs"
-                    onClick={this.onClickUnpublish}
-                >
-                    Build live
-                </TextLink>
             </>
         )
     }
@@ -276,7 +269,7 @@ const Pipelines = () => {
                     buttonType="positive"
                     onClick={onPreviewClick}
                 >
-                    {isPreviewSpin ? <Spin /> : <>Build the preview site</>}
+                    {isPreviewSpin ? <Spinner /> : <>Build the preview site</>}
                 </Button>
             </Paragraph>
             <Paragraph>
