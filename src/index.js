@@ -289,22 +289,30 @@ const Pipelines = (props) => {
     }, []);
 
     const onLiveClick = useCallback(() => {
-        setLiveSpin(true);
-        axios
-            .post(url,
-            { target: { ...target, ref_name: "master" } },
-                config
-            )
-        .then((resp) => {
-            setLiveStatusTimer(setInterval(() => {
-                checkPipelineStatus(response.data.uuid, (data) => {
-                    setLiveSpin(false);
-                    setCompleteLiveTime(new Date(data.completed_on));
+        props.extension.dialogs.openConfirm({
+            title: 'Push all changed entries to Live site?',
+            message: 'Caution: check preview site first!',
+            intent: 'negative',
+            confirmLabel: 'Build the live site',
+            cancelLabel: 'Cancel'
+        }).then(() => {
+            setLiveSpin(true);
+            axios
+                .post(url,
+                    { target: { ...target, ref_name: "master" } },
+                    config
+                )
+                .then((resp) => {
+                    setLiveStatusTimer(setInterval(() => {
+                        checkPipelineStatus(response.data.uuid, (data) => {
+                            setLiveSpin(false);
+                            setCompleteLiveTime(new Date(data.completed_on));
+                        })
+                    }, 10000));
+                    stopLiveTimer();
                 })
-            }, 10000));
-            stopLiveTimer();
+                .catch((err) => setLiveSpin(false))
         })
-        .catch((err) => setLiveSpin(false))
 
     }, []);
 
@@ -315,7 +323,6 @@ const Pipelines = (props) => {
         ? 'Build the live site'
         : <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The live site is built. Build it again?</>
 
-    console.log(props);
     return (
         <>
             <Paragraph>
@@ -330,7 +337,7 @@ const Pipelines = (props) => {
                 </Button>
             </Paragraph>
             <Paragraph>
-                <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site. <br />Caution: check preview site first!</HelpText>
+                <HelpText style={{ marginTop: 10, marginBottom: 10 }}>Push all changed entries to Live site</HelpText>
                 <Button
                     className="publish-button"
                     buttonType="negative"
