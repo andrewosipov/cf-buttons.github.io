@@ -254,8 +254,8 @@ const Pipelines = (props) => {
     const [isLiveSpin, setLiveSpin] = useState(false);
     const [previewStatusTimer, setPreviewStatusTimer] = useState(0);
     const [liveStatusTimer, setLiveStatusTimer] = useState(0);
-    const [completePreviewTime, setCompletePreviewTime] = useState(null);
-    const [completeLiveTime, setCompleteLiveTime] = useState(null);
+    const [completePreviewStatus, setCompletePreviewStatus] = useState(null);
+    const [completeLiveStatus, setCompleteLiveStatus] = useState(null);
 
     const checkPipelineStatus = (uuid, callback) => axios
         .get(`${url}${encodeURI(uuid)}`, config)
@@ -279,7 +279,7 @@ const Pipelines = (props) => {
                 setPreviewStatusTimer(setInterval(() => {
                     checkPipelineStatus(response.data.uuid, (data) => {
                         setPreviewSpin(false);
-                        setCompletePreviewTime(new Date(data.completed_on));
+                        setCompletePreviewStatus(data.state.result.name);
                     })
                 }, 10000))
                 stopPreviewTimer();
@@ -303,11 +303,11 @@ const Pipelines = (props) => {
                         {target: {...target, ref_name: "master"}},
                         config
                     )
-                    .then((resp) => {
+                    .then((response) => {
                         setLiveStatusTimer(setInterval(() => {
                             checkPipelineStatus(response.data.uuid, (data) => {
                                 setLiveSpin(false);
-                                setCompleteLiveTime(new Date(data.completed_on));
+                                setCompleteLiveStatus(data.state.result.name);
                             })
                         }, 10000));
                         stopLiveTimer();
@@ -318,12 +318,27 @@ const Pipelines = (props) => {
 
     }, []);
 
-    const renderPreviewLabel = () => completePreviewTime === null
-        ? 'Build the preview site'
-        : <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The preview site is built. Build it again?</>
-    const renderLiveLabel = () => completeLiveTime === null
-        ? 'Build the live site'
-        : <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The live site is built. Build it again?</>
+    const renderPreviewLabel = () => {
+        switch (completePreviewStatus) {
+            case null:
+                return 'Build the preview site';
+            case 'SUCCESSFUL':
+                return <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The preview site is built. Build it again?</>;
+            case 'FAILED':
+                return <><Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />Warning! The preview site building was failed. Build it again?</>;
+        }
+    }
+
+    const renderLiveLabel = () => {
+        switch (completeLiveStatus) {
+            case null:
+                return 'Build the preview site';
+            case 'SUCCESSFUL':
+                return <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The live site is built. Build it again?</>;
+            case 'FAILED':
+                return <><Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />Warning! The live site building was failed. Build it again?</>;
+        }
+    }
 
     return (
         <>
