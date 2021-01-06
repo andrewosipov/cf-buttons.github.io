@@ -249,7 +249,7 @@ const config = {
     }
 };
 
-const Pipelines = () => {
+const Pipelines = (props) => {
     const [isPreviewSpin, setPreviewSpin] = useState(false);
     const [isLiveSpin, setLiveSpin] = useState(false);
     const [previewStatusTimer, setPreviewStatusTimer] = useState(0);
@@ -315,6 +315,7 @@ const Pipelines = () => {
         ? 'Build the live site'
         : <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The live site is built. Build it again?</>
 
+    console.log(props);
     return (
         <>
             <Paragraph>
