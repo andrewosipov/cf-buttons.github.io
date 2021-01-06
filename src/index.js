@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Paragraph, HelpText, Spinner } from '@contentful/forma-36-react-components';
+import { Button, Paragraph, HelpText, Spinner, Icon } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import axios from 'axios';
 import '@contentful/forma-36-react-components/dist/styles.css';
@@ -308,7 +308,7 @@ const Pipelines = () => {
 
     }, []);
 
-    const renderPreviewLabel = () => completePreviewTime === null ? 'Build the preview site' : 'The preview site is built. Build it again?'
+    const renderPreviewLabel = () => completePreviewTime === null ? <><Icon icon="InfoCircle" />Build the preview site</> : <><Icon icon="InfoCircle" />The preview site is built. Build it again?</>
     const renderLiveLabel = () => completeLiveTime === null ? 'Build the live site' : 'The live site is built. Build it again?'
 
     return (
