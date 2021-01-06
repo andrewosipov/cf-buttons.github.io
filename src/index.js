@@ -308,7 +308,7 @@ const Pipelines = () => {
 
     }, []);
 
-    const renderPreviewLabel = () => completePreviewTime === null ? <><Icon icon="InfoCircle" />Build the preview site</> : <><Icon icon="InfoCircle" />The preview site is built. Build it again?</>
+    const renderPreviewLabel = () => completePreviewTime === null ? <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />Build the preview site</> : <><Icon icon="InfoCircle" color="white" />The preview site is built. Build it again?</>
     const renderLiveLabel = () => completeLiveTime === null ? 'Build the live site' : 'The live site is built. Build it again?'
 
     return (
