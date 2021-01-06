@@ -139,6 +139,7 @@ const Pipelines = (props) => {
             case 'PAUSED':
                 return (
                     <>
+                        <Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />
                         <Tooltip content="Warning! The live site building was stopped. Build it again?">
                             Warning! The live site building was stopped. Build it again?
                         </Tooltip>
