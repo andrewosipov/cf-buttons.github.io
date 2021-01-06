@@ -126,9 +126,21 @@ const Pipelines = (props) => {
             case 'SUCCESSFUL':
                 return <><Icon icon="InfoCircle" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />The live site is built. Build it again?</>;
             case 'FAILED':
-                return <><Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />Warning! The live site building was failed. Build it again?</>;
+                return (
+                    <>
+                        <Tooltip content="Warning! The live site building was failed. Build it again?">
+                            Warning! The live site building was failed. Build it again?
+                        </Tooltip>
+                    </>
+                );
             case 'STOPPED':
-                return <><Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />Warning! The live site building was stopped. Build it again?</>;
+                return (
+                    <>
+                        <Tooltip content="Warning! The live site building was stopped. Build it again?">
+                            Warning! The live site building was stopped. Build it again?
+                        </Tooltip>
+                    </>
+                );
             default:
                 return 'Build the preview site';
         }
