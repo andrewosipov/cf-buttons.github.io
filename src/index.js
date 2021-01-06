@@ -19,11 +19,12 @@ const config = {
     }
 };
 
+let previewStatusTimer = 0;
+let liveStatusTimer = 0;
+
 const Pipelines = (props) => {
     const [isPreviewSpin, setPreviewSpin] = useState(false);
     const [isLiveSpin, setLiveSpin] = useState(false);
-    const [previewStatusTimer, setPreviewStatusTimer] = useState(0);
-    const [liveStatusTimer, setLiveStatusTimer] = useState(0);
     const [completePreviewStatus, setCompletePreviewStatus] = useState(null);
     const [completeLiveStatus, setCompleteLiveStatus] = useState(null);
 
@@ -46,13 +47,13 @@ const Pipelines = (props) => {
                 config
             )
             .then((response) => {
-                setPreviewStatusTimer(setInterval(() => {
+                previewStatusTimer = setInterval(() => {
                     checkPipelineStatus(response.data.uuid, (data) => {
                         clearInterval(previewStatusTimer);
                         setPreviewSpin(false);
                         setCompletePreviewStatus(data.state.result.name);
                     })
-                }, 10000))
+                }, 10000)
                 stopPreviewTimer();
             })
             .catch((err) => setPreviewSpin(false))
@@ -75,13 +76,13 @@ const Pipelines = (props) => {
                         config
                     )
                     .then((response) => {
-                        setLiveStatusTimer(setInterval(() => {
+                        liveStatusTimer = setInterval(() => {
                             checkPipelineStatus(response.data.uuid, (data) => {
                                 clearInterval(liveStatusTimer);
                                 setLiveSpin(false);
                                 setCompleteLiveStatus(data.state.result.name);
                             })
-                        }, 10000));
+                        }, 10000);
                         stopLiveTimer();
                     })
                     .catch((err) => setLiveSpin(false))
@@ -106,6 +107,7 @@ const Pipelines = (props) => {
                     </>
                 );
             case 'STOPPED':
+            case 'PAUSED':
                 return (
                     <>
                         <Icon icon="Warning" color="white" style={{ margin: '-3px 6px 0 0', verticalAlign: 'middle' }} />
@@ -134,6 +136,7 @@ const Pipelines = (props) => {
                     </>
                 );
             case 'STOPPED':
+            case 'PAUSED':
                 return (
                     <>
                         <Tooltip content="Warning! The live site building was stopped. Build it again?">
