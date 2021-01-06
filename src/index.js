@@ -295,23 +295,25 @@ const Pipelines = (props) => {
             intent: 'negative',
             confirmLabel: 'Build the live site',
             cancelLabel: 'Cancel'
-        }).then(() => {
-            setLiveSpin(true);
-            axios
-                .post(url,
-                    { target: { ...target, ref_name: "master" } },
-                    config
-                )
-                .then((resp) => {
-                    setLiveStatusTimer(setInterval(() => {
-                        checkPipelineStatus(response.data.uuid, (data) => {
-                            setLiveSpin(false);
-                            setCompleteLiveTime(new Date(data.completed_on));
-                        })
-                    }, 10000));
-                    stopLiveTimer();
-                })
-                .catch((err) => setLiveSpin(false))
+        }).then((isConfirm) => {
+            if (isConfirm) {
+                setLiveSpin(true);
+                axios
+                    .post(url,
+                        {target: {...target, ref_name: "master"}},
+                        config
+                    )
+                    .then((resp) => {
+                        setLiveStatusTimer(setInterval(() => {
+                            checkPipelineStatus(response.data.uuid, (data) => {
+                                setLiveSpin(false);
+                                setCompleteLiveTime(new Date(data.completed_on));
+                            })
+                        }, 10000));
+                        stopLiveTimer();
+                    })
+                    .catch((err) => setLiveSpin(false))
+            }
         })
 
     }, []);
