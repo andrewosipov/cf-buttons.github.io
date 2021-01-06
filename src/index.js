@@ -254,12 +254,14 @@ const Pipelines = () => {
     const [isLiveSpin, setLiveSpin] = useState(false);
     const [previewStatusTimer, setPreviewStatusTimer] = useState(0);
     const [liveStatusTimer, setLiveStatusTimer] = useState(0);
+    const [completePreviewTime, setCompletePreviewTime] = useState(null);
+    const [completeLiveTime, setCompleteLiveTime] = useState(null);
 
     const checkPipelineStatus = (uuid, callback) => axios
         .get(`${url}${encodeURI(uuid)}`, config)
         .then((response) => {
             if (response.data.state.name === 'COMPLETED') {
-                callback()
+                callback(response.data)
             }
         })
 
@@ -275,8 +277,9 @@ const Pipelines = () => {
             )
             .then((response) => {
                 setPreviewStatusTimer(setInterval(() => {
-                    checkPipelineStatus(response.data.uuid, () => {
+                    checkPipelineStatus(response.data.uuid, (data) => {
                         setPreviewSpin(false);
+                        setCompletePreviewTime(new Date(data.completed_on));
                     })
                 }, 10000))
                 stopPreviewTimer();
@@ -294,8 +297,9 @@ const Pipelines = () => {
             )
         .then((resp) => {
             setLiveStatusTimer(setInterval(() => {
-                checkPipelineStatus(response.data.uuid, () => {
+                checkPipelineStatus(response.data.uuid, (data) => {
                     setLiveSpin(false);
+                    setCompleteLiveTime(new Date(data.completed_on));
                 })
             }, 10000));
             stopLiveTimer();
@@ -303,6 +307,9 @@ const Pipelines = () => {
         .catch((err) => setLiveSpin(false))
 
     }, []);
+
+    const renderPreviewLabel = () => completePreviewTime === null ? 'Build the preview site' : 'The preview site is built. Build it again?'
+    const renderLiveLabel = () => completeLiveTime === null ? 'Build the live site' : 'The live site is built. Build it again?'
 
     return (
         <>
@@ -314,7 +321,7 @@ const Pipelines = () => {
                     isFullWidth
                     onClick={onPreviewClick}
                 >
-                    { isPreviewSpin ? <Spinner color="white" /> : <>Build the preview site</> }
+                    { isPreviewSpin ? <Spinner color="white" /> : renderPreviewLabel() }
                 </Button>
             </Paragraph>
             <Paragraph>
@@ -325,7 +332,7 @@ const Pipelines = () => {
                     isFullWidth
                     onClick={onLiveClick}
                 >
-                    { isLiveSpin ? <Spinner color="white" /> : <>Build the live site</> }
+                    { isLiveSpin ? <Spinner color="white" /> : renderLiveLabel() }
                 </Button>
             </Paragraph>
             <Paragraph>&nbsp;</Paragraph>
