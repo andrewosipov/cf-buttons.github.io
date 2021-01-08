@@ -160,7 +160,7 @@ const Pipelines = (props) => {
                     isFullWidth
                     onClick={onPreviewClick}
                 >
-                    { isPreviewSpin ? <Spinner color="white" /> : renderPreviewLabel() }
+                    { isPreviewSpin ? (<><Spinner color="white" /> The preview site is building</>) : renderPreviewLabel() }
                 </Button>
             </Paragraph>
             <Paragraph>
@@ -171,7 +171,7 @@ const Pipelines = (props) => {
                     isFullWidth
                     onClick={onLiveClick}
                 >
-                    { isLiveSpin ? <Spinner color="white" /> : renderLiveLabel() }
+                    { isLiveSpin ? (<><Spinner color="white" /> The live site is building</>) : renderLiveLabel() }
                 </Button>
             </Paragraph>
             <Paragraph>&nbsp;</Paragraph>
