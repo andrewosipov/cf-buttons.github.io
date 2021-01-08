@@ -7,7 +7,7 @@ import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
 import './index.css';
 
-const url = 'https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-com/pipelines/';
+const url = 'https://api.bitbucket.org/2.0/repositories/musicfirstdevteam/musicfirst-co-uk/pipelines/';
 const target = {
     ref_type: "branch",
     type: "pipeline_ref_target"
