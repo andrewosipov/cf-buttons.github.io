@@ -15,7 +15,7 @@ const target = {
 const config = {
     headers: {
         Accept: 'application/json',
-        Authorization: 'Basic bWFpbEBhbmRyZXctb3NpcG92LnBybzpwIzByVW1AMTE='
+        Authorization: 'asic bWFpbEBhbmRyZXctb3NpcG92LnBybzpsaW1hc3MwbA=='
     }
 };
 
